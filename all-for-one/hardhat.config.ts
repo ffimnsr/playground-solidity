@@ -5,6 +5,7 @@ import "dotenv/config";
 import "@nomiclabs/hardhat-waffle";
 
 const PRIVATE_KEY = process.env.TESTNET_PRIVATE_KEY;
+const ALCHEMY_POLYGON_NET = process.env.ALCHEMY_POLYGON_NET;
 
 task("accounts", "Prints the list of accounts", async (args, hre): Promise<void> => {
   const accounts: SignerWithAddress[] = await hre.ethers.getSigners();
@@ -23,17 +24,26 @@ task("balances", "Prints the list of AVAX account balances", async (args, hre): 
   }
 });
 
+// Don't forget to add gas price as it will break due to london hardfork.
 export default {
   solidity: "0.8.9",
+  defaultNetwork: "matic",
   networks: {
     fuji: {
       url: "https://api.avax-test.network/ext/bc/C/rpc",
       gasPrice: 225000000000,
       chainId: 43113,
-      // Use only testnet accounts
-      accounts: [
-        `${PRIVATE_KEY}`,
-      ],
+      accounts: [PRIVATE_KEY],
+    },
+    mumbai: {
+      url: "https://rpc-mumbai.maticvigil.com",
+      gasPrice: 8000000000,
+      chainId: 80001,
+      accounts: [PRIVATE_KEY],
+    },
+    matic: {
+      url: ALCHEMY_POLYGON_NET,
+      accounts: [PRIVATE_KEY],
     },
   },
 };

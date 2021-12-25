@@ -1,16 +1,15 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.9;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "hardhat/console.sol";
 
-contract ShibaInu is ERC721 {
+contract CryptoSlimes is ERC1155, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
 
-    constructor() ERC721("ShibaInu", "SHIB")
-    {
+    constructor() public ERC1155(") {
     }
 
     function awardItem(address player)

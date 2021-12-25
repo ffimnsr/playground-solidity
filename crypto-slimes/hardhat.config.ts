@@ -23,7 +23,7 @@ task("balances", "Prints the list of AVAX account balances", async (args, hre): 
   }
 });
 
-export default {
+module.exports = {
   solidity: "0.8.9",
   networks: {
     fuji: {
